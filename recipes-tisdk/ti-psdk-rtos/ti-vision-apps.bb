@@ -24,10 +24,34 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/../meta-ti/meta-ti-bsp/licenses/TI-TFL;md
                     file://${COREBASE}/meta/files/common-licenses/OpenSSL;md5=4eb1764f3e65fafa1a25057f9082f2ae \
                     "
 
-SRC_URI = "repo://git.ti.com/git/processor-sdk/psdk_repo_manifests.git;protocol=https;branch=refs/tags/REL.PSDK.ANALYTICS.10.00.00.04;manifest=vision_apps_yocto.xml"
+SRCREV_FORMAT="default"
+SRCREV_sdk_builder = "7e104e54870c8bc751ed74873ada8519f4fba73f"
+SRCREV_app_utils = "07816742bf0c4cd372c19eeebde64ed9499ac826"
+SRCREV_vision_apps = "8b1b730370f5ca028f31d2521408920f5536b57b"
+SRCREV_tiovx = "370e9661a318c5fdce8e05835252433ca3daf17a"
+SRCREV_imaging = "0f199b4d6d6cf0212fae88f24e764ebb6df73fca"
+SRCREV_video_io = "108ae96788c3f97768c434d011269518532d2b3b"
+SRCREV_ti-perception-toolkit = "8d090941dd671a5e670aa8f777986be73763ab41"
+SRCREV_psdk_include = "2dde83677ad4daf0d3e53bcd6d2a032a9bac53aa"
+SRCREV_arm-tidl = "d71785f6619bcc07f2fc6ed59cefe1de8fb18288"
+SRCREV_concerto = "38b9190a5d335e58d81d21e3e058b11e5c47c605"
+TI_BRANCH = "main"
+FILES:${PN} += "/opt/* \
+                /usr/lib64/* \
+"
 
-FILES:${PN} += "/opt/*"
-
+SRC_URI = " \
+git://git.ti.com/git/processor-sdk/sdk_builder.git;protocol=https;branch=${TI_BRANCH};branch=${TI_BRANCH};name=sdk_builder;destsuffix=repo/sdk_builder \
+git://git.ti.com/git/processor-sdk/app_utils.git;protocol=https;branch=${TI_BRANCH};name=app_utils;destsuffix=repo/app_utils \
+git://git.ti.com/git/processor-sdk/vision_apps.git;protocol=https;branch=${TI_BRANCH};name=vision_apps;destsuffix=repo/vision_apps \
+git://git.ti.com/git/processor-sdk/tiovx.git;protocol=https;branch=${TI_BRANCH};name=tiovx;destsuffix=repo/tiovx \
+git://git.ti.com/git/processor-sdk/imaging.git;protocol=https;branch=${TI_BRANCH};name=imaging;destsuffix=repo/imaging \
+git://git.ti.com/git/processor-sdk/video_io.git;protocol=https;branch=${TI_BRANCH};name=video_io;destsuffix=repo/video_io \
+git://git.ti.com/git/processor-sdk/ti-perception-toolkit.git;protocol=https;branch=${TI_BRANCH};name=ti-perception-toolkit;destsuffix=repo/ti-perception-toolkit \
+git://git.ti.com/git/processor-sdk/psdk_include.git;protocol=https;branch=${TI_BRANCH};name=psdk_include;destsuffix=repo/psdk_include \
+git://git.ti.com/git/processor-sdk-vision/arm-tidl.git;protocol=https;branch=master;name=arm-tidl;destsuffix=repo/psdk_include/tidl_j7/arm-tidl \
+git://git.ti.com/git/processor-sdk/concerto.git;protocol=https;branch=${TI_BRANCH};name=concerto;destsuffix=repo/sdk_builder/concerto \
+"
 #PTK needs:
 # EGL/egl.h
 # glm/glm.hpp
@@ -55,7 +79,7 @@ EXTRA_OEMAKE += "-C ${S}/repo/sdk_builder"
 do_fetch[depends] += "repo-native:do_populate_sysroot"
 
 do_compile() {
-    CROSS_COMPILE_LINARO=aarch64-oe-linux- \
+    CROSS_COMPILE_LINARO=aarch64-wrs-linux- \
     LINUX_SYSROOT_ARM=${STAGING_DIR_TARGET} \
     TREAT_WARNINGS_AS_ERROR=0 \
     GCC_LINUX_ARM_ROOT= \
