@@ -1,0 +1,45 @@
+From e81443224bb5eee7f0c471eada33d897054ca097 Mon Sep 17 00:00:00 2001
+From: Xulin Sun <xulin.sun@windriver.com>
+Date: Sat, 31 Aug 2024 11:15:13 +0000
+Subject: [PATCH] edgeai-tiovx-kernels: cmake: remove the CMAKE_INSTALL_LIBDIR
+ setting
+
+Remove the CMAKE_INSTALL_LIBDIR setting, and depend on the system's
+CMAKE_INSTALL_LIBDIR value, since the default CMAKE_INSTALL_LIBDIR
+for WRLinux is 'lib64', and when multilib is disabled, it is 'lib'.
+
+(LOCAL REV: NOT UPSTREAM) - Wrlinux specific
+
+Signed-off-by: Xulin Sun <xulin.sun@windriver.com>
+---
+ cmake/common.cmake | 7 +++----
+ 1 file changed, 3 insertions(+), 4 deletions(-)
+
+diff --git a/cmake/common.cmake b/cmake/common.cmake
+index ae50027..c102882 100644
+--- a/cmake/common.cmake
++++ b/cmake/common.cmake
+@@ -20,7 +20,6 @@ endif()
+ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_OUTPUT_DIR}/lib/${CMAKE_BUILD_TYPE})
+ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_OUTPUT_DIR}/lib/${CMAKE_BUILD_TYPE})
+ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_OUTPUT_DIR}/bin/${CMAKE_BUILD_TYPE})
+-set(CMAKE_INSTALL_LIBDIR           lib)
+ 
+ if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+     set(CMAKE_INSTALL_PREFIX /usr CACHE PATH "Installation Prefix" FORCE)
+@@ -77,9 +76,9 @@ add_definitions(
+ 
+ set(VISION_APPS_LIBS_PATH $ENV{VISION_APPS_LIBS_PATH})
+ set(EDGEAI_LIBS_PATH $ENV{EDGEAI_LIBS_PATH})
+-link_directories(${TARGET_FS}/usr/lib/aarch64-linux
+-                 ${TARGET_FS}/usr/lib
+-                 ${CMAKE_LIBRARY_PATH}/usr/lib
++link_directories(${TARGET_FS}/usr/${CMAKE_INSTALL_LIBDIR}/aarch64-linux
++                 ${TARGET_FS}/usr/${CMAKE_INSTALL_LIBDIR}
++                 ${CMAKE_LIBRARY_PATH}/usr/${CMAKE_INSTALL_LIBDIR}
+                  ${CMAKE_LIBRARY_PATH}/lib
+                  ${VISION_APPS_LIBS_PATH}
+                  ${EDGEAI_LIBS_PATH}
+-- 
+2.44.1
+

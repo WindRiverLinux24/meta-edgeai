@@ -1,0 +1,31 @@
+From 4340738f3345548aa9a495440cdb2b0cdfe25872 Mon Sep 17 00:00:00 2001
+From: Xulin Sun <xulin.sun@windriver.com>
+Date: Wed, 28 Feb 2024 06:51:26 +0000
+Subject: [PATCH] cmake: remove the CMAKE_INSTALL_LIBDIR setting
+
+Remove the CMAKE_INSTALL_LIBDIR setting, and depend on the system's
+CMAKE_INSTALL_LIBDIR value, since the default CMAKE_INSTALL_LIBDIR
+for WRLinux is 'lib64', and when multilib is disabled, it is 'lib'.
+
+(LOCAL REV: NOT UPSTREAM) - Wrlinux specific
+
+Signed-off-by: Xulin Sun <xulin.sun@windriver.com>
+---
+ cmake/common.cmake | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/cmake/common.cmake b/cmake/common.cmake
+index aa7741f..7d136c5 100644
+--- a/cmake/common.cmake
++++ b/cmake/common.cmake
+@@ -20,7 +20,6 @@ endif()
+ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_OUTPUT_DIR}/lib/${CMAKE_BUILD_TYPE})
+ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_OUTPUT_DIR}/lib/${CMAKE_BUILD_TYPE})
+ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_OUTPUT_DIR}/bin/${CMAKE_BUILD_TYPE})
+-set(CMAKE_INSTALL_LIBDIR           lib)
+ 
+ if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+     set(CMAKE_INSTALL_PREFIX /usr CACHE PATH "Installation Prefix" FORCE)
+-- 
+2.35.5
+

@@ -7,7 +7,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1f7721ee7d288457c5a70d0c8ff44b87"
 
 PV = "1.0.0"
 BRANCH = "main"
-SRC_URI = "git://git.ti.com/git/edgeai/edgeai-tiovx-modules.git;branch=${BRANCH};protocol=https"
+SRC_URI = "git://git.ti.com/git/edgeai/edgeai-tiovx-modules.git;branch=${BRANCH};protocol=https \
+file://0001-edgeai-tiovx-modules-cmake-remove-the-CMAKE_INSTALL_.patch"
 SRCREV = "a5bd23587247fead99cc8bf69d3e19713d1b6739"
 
 PLAT_SOC = ""

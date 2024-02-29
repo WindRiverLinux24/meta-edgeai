@@ -51,7 +51,9 @@ git://git.ti.com/git/processor-sdk/ti-perception-toolkit.git;protocol=https;bran
 git://git.ti.com/git/processor-sdk/psdk_include.git;protocol=https;branch=${TI_BRANCH};name=psdk_include;destsuffix=repo/psdk_include \
 git://git.ti.com/git/processor-sdk-vision/arm-tidl.git;protocol=https;branch=master;name=arm-tidl;destsuffix=repo/psdk_include/tidl_j7/arm-tidl \
 git://git.ti.com/git/processor-sdk/concerto.git;protocol=https;branch=${TI_BRANCH};name=concerto;destsuffix=repo/sdk_builder/concerto \
+file://0001-makefile_linux_arm-replace-usr-lib-with-variable-lib.patch;patchdir=repo/sdk_builder \
 "
+
 #PTK needs:
 # EGL/egl.h
 # glm/glm.hpp

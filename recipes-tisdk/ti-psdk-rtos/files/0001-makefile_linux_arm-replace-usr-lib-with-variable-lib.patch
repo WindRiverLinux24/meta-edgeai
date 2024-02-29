@@ -1,0 +1,73 @@
+From e27359f9ffcdb4026c7d766f306c862e0be08c09 Mon Sep 17 00:00:00 2001
+From: Xulin Sun <xulin.sun@windriver.com>
+Date: Sat, 31 Aug 2024 09:59:40 +0000
+Subject: [PATCH] makefile_linux_arm: replace 'usr/lib' with variable
+ '${libdir}'
+
+Replace 'usr/lib' with variable 'libdir', since the default for
+WRLinux is 'usr/lib64', and when multilib is disabled, it is 'usr/lib'.
+
+(LOCAL REV: NOT UPSTREAM) - Wrlinux specific
+
+Signed-off-by: Xulin Sun <xulin.sun@windriver.com>
+---
+ makerules/makefile_linux_arm.mak | 16 ++++++++--------
+ 1 file changed, 8 insertions(+), 8 deletions(-)
+
+diff --git a/makerules/makefile_linux_arm.mak b/makerules/makefile_linux_arm.mak
+index 8360e67..5d83587 100644
+--- a/makerules/makefile_linux_arm.mak
++++ b/makerules/makefile_linux_arm.mak
+@@ -33,15 +33,15 @@ ifeq ($(YOCTO_STAGE),)
+ 	install -m 775 -d $(LINUX_BOOTFS_STAGE_PATH)
+ 	if [ -f $(LINUX_FS_BOOT_PATH)/version ]; then cp -rf $(LINUX_FS_BOOT_PATH)/* $(LINUX_BOOTFS_STAGE_PATH)/; fi
+ endif
+-	install -m 775 -d $(LINUX_FS_STAGE_PATH)/usr/lib
++	install -m 775 -d $(LINUX_FS_STAGE_PATH)/${libdir}
+ 
+ ifeq ($(BUILD_CPU_MPU1),yes)
+ 	# copy application binaries and scripts
+ 	install -m 775 -d $(LINUX_FS_STAGE_PATH)/opt/vision_apps
+ 	cp $(VISION_APPS_PATH)/out/$(TARGET_SOC)/$(MPU_CPU)/LINUX/$(LINUX_APP_PROFILE)/*.out $(LINUX_FS_STAGE_PATH)/opt/vision_apps || true
+ 	cp $(VISION_APPS_PATH)/out/$(TARGET_SOC)/$(MPU_CPU)/LINUX/$(LINUX_APP_PROFILE)/vx_app_arm_remote_log.out $(LINUX_FS_STAGE_PATH)/opt || true
+-	cp $(VISION_APPS_PATH)/out/$(TARGET_SOC)/$(MPU_CPU)/LINUX/$(LINUX_APP_PROFILE)/libtivision_apps.so.$(PSDK_VERSION) $(LINUX_FS_STAGE_PATH)/usr/lib
+-	cp -P $(VISION_APPS_PATH)/out/$(TARGET_SOC)/$(MPU_CPU)/LINUX/$(LINUX_APP_PROFILE)/libtivision_apps.so $(LINUX_FS_STAGE_PATH)/usr/lib
++	cp $(VISION_APPS_PATH)/out/$(TARGET_SOC)/$(MPU_CPU)/LINUX/$(LINUX_APP_PROFILE)/libtivision_apps.so.$(PSDK_VERSION) $(LINUX_FS_STAGE_PATH)/${libdir}
++	cp -P $(VISION_APPS_PATH)/out/$(TARGET_SOC)/$(MPU_CPU)/LINUX/$(LINUX_APP_PROFILE)/libtivision_apps.so $(LINUX_FS_STAGE_PATH)/${libdir}
+ 	cp $(VISION_APPS_PATH)/apps/basic_demos/app_linux_fs_files/vision_apps_init.sh $(LINUX_FS_STAGE_PATH)/opt/vision_apps/.
+ 	cp -r $(VISION_APPS_PATH)/apps/basic_demos/app_linux_fs_files/vision_apps_all/* $(LINUX_FS_STAGE_PATH)/opt/vision_apps/.
+ ifeq ($(YOCTO_STAGE),)
+@@ -57,9 +57,9 @@ endif
+ 
+ ifeq ($(BUILD_ENABLE_TIDL_RT),yes)
+ 	#Copying OSRT components
+-	cp -P $(TIDL_PATH)/arm-tidl/tfl_delegate/out/$(TARGET_SOC)/$(MPU_CPU)/LINUX/$(LINUX_APP_PROFILE)/*.so*  $(LINUX_FS_STAGE_PATH)/usr/lib
+-	cp -P $(TIDL_PATH)/arm-tidl/onnxrt_ep/out/$(TARGET_SOC)/$(MPU_CPU)/LINUX/$(LINUX_APP_PROFILE)/*.so*  $(LINUX_FS_STAGE_PATH)/usr/lib
+-	cp -P $(TIDL_PATH)/arm-tidl/rt/out/$(TARGET_SOC)/$(MPU_CPU)/LINUX/$(LINUX_APP_PROFILE)/*.so*  $(LINUX_FS_STAGE_PATH)/usr/lib
++	cp -P $(TIDL_PATH)/arm-tidl/tfl_delegate/out/$(TARGET_SOC)/$(MPU_CPU)/LINUX/$(LINUX_APP_PROFILE)/*.so*  $(LINUX_FS_STAGE_PATH)/${libdir}
++	cp -P $(TIDL_PATH)/arm-tidl/onnxrt_ep/out/$(TARGET_SOC)/$(MPU_CPU)/LINUX/$(LINUX_APP_PROFILE)/*.so*  $(LINUX_FS_STAGE_PATH)/${libdir}
++	cp -P $(TIDL_PATH)/arm-tidl/rt/out/$(TARGET_SOC)/$(MPU_CPU)/LINUX/$(LINUX_APP_PROFILE)/*.so*  $(LINUX_FS_STAGE_PATH)/${libdir}
+ 	cp $(TIDL_PATH)/arm-tidl/rt/out/$(TARGET_SOC)/$(MPU_CPU)/LINUX/$(LINUX_APP_PROFILE)/*.out     $(LINUX_FS_STAGE_PATH)/opt/tidl_test/
+ endif
+ 
+@@ -328,7 +328,7 @@ define CLEAN_COPY_FROM_STAGE_FAST =
+ 	cp -r $(LINUX_FS_STAGE_PATH)/usr/lib/firmware/$(LINUX_FIRMWARE_PREFIX)-*-fw $(1)/usr/lib/firmware/.
+ 	cp -r $(LINUX_FS_STAGE_PATH)/usr/lib/firmware/$(FIRMWARE_SUBFOLDER) $(1)/usr/lib/firmware/.
+ 	cp -r $(LINUX_FS_STAGE_PATH)/opt/vision_apps/* $(1)/opt/vision_apps/.
+-	cp -r $(LINUX_FS_STAGE_PATH)/usr/lib/* $(1)/usr/lib/.
++	cp -r $(LINUX_FS_STAGE_PATH)/${libdir}/* $(1)/${libdir}/.
+ 	sync
+ endef
+ 
+@@ -404,7 +404,7 @@ linux_host_libs_includes:
+ 		BUILD_CPU_MPU1=yes BUILD_CPU_MCU1_0=no BUILD_CPU_MCU2_0=no BUILD_CPU_MCU2_1=no \
+ 		BUILD_CPU_MCU3_0=no BUILD_CPU_MCU3_1=no BUILD_CPU_C6x_1=no BUILD_CPU_C6x_2=no \
+ 		BUILD_CPU_C7x_1=no $(MAKE) linux_fs_install
+-	rm -Rf $(LINUX_FS_STAGE_PATH)/usr/lib $(LINUX_FS_STAGE_PATH)/opt
++	rm -Rf $(LINUX_FS_STAGE_PATH)/${libdir} $(LINUX_FS_STAGE_PATH)/opt
+ 
+ linux_fs_install: linux_fs_stage
+ 	$(call CLEAN_COPY_FROM_STAGE,$(LINUX_FS_PATH))
+-- 
+2.44.1
+
