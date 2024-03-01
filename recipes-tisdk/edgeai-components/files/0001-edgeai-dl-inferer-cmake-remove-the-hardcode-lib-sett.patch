@@ -1,0 +1,75 @@
+From 2290f7e13ff716302b4f3d14ec6a736a18dc3dba Mon Sep 17 00:00:00 2001
+From: Xulin Sun <xulin.sun@windriver.com>
+Date: Sun, 1 Sep 2024 06:32:13 +0000
+Subject: [PATCH] edgeai-dl-inferer: cmake: remove the hardcode 'lib' setting
+
+Remove the CMAKE_INSTALL_LIBDIR setting, and depend on the system's
+CMAKE_INSTALL_LIBDIR value, since the default CMAKE_INSTALL_LIBDIR
+for WRLinux is 'lib64', and when multilib is disabled, it is 'lib'.
+
+(LOCAL REV: NOT UPSTREAM) - Wrlinux specific
+
+Signed-off-by: Xulin Sun <xulin.sun@windriver.com>
+---
+ cmake/common.cmake | 13 ++++++-------
+ 1 file changed, 6 insertions(+), 7 deletions(-)
+
+diff --git a/cmake/common.cmake b/cmake/common.cmake
+index a908a56..9525109 100644
+--- a/cmake/common.cmake
++++ b/cmake/common.cmake
+@@ -26,7 +26,6 @@ endif()
+ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_OUTPUT_DIR}/lib/${CMAKE_BUILD_TYPE})
+ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_OUTPUT_DIR}/lib/${CMAKE_BUILD_TYPE})
+ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_OUTPUT_DIR}/bin/${CMAKE_BUILD_TYPE})
+-set(CMAKE_INSTALL_LIBDIR           lib)
+ 
+ if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+     set(CMAKE_INSTALL_PREFIX /usr CACHE PATH "Installation Prefix" FORCE)
+@@ -85,7 +84,7 @@ set(TARGET_OS           LINUX)
+ 
+ set(TENSORFLOW_INSTALL_DIR ${TARGET_FS}/usr/include/tensorflow)
+ set(ONNXRT_INSTALL_DIR ${TARGET_FS}/usr/include/onnxruntime)
+-set(TFLITE_INSTALL_DIR ${TARGET_FS}/usr/lib/tflite_2.12)
++set(TFLITE_INSTALL_DIR ${TARGET_FS}/usr/${CMAKE_INSTALL_LIBDIR}/tflite_2.12)
+ 
+ add_definitions(
+     -DTARGET_CPU=${TARGET_CPU}
+@@ -104,13 +103,13 @@ if(USE_ONNX_RT)
+ add_definitions(-DUSE_ONNX_RT)
+ endif()
+ 
+-link_directories(${TARGET_FS}/usr/lib/aarch64-linux-gnu
+-                 ${TARGET_FS}/usr/lib/
++link_directories(${TARGET_FS}/usr/${CMAKE_INSTALL_LIBDIR}/aarch64-linux-gnu
++                 ${TARGET_FS}/usr/${CMAKE_INSTALL_LIBDIR}/
+                  )
+ 
+ if(USE_DLR_RT)
+ link_directories(${TARGET_FS}/usr//local/dlr)
+-link_directories(${TARGET_FS}/usr/lib/python3.12/site-packages/dlr)
++link_directories(${TARGET_FS}/usr/${CMAKE_INSTALL_LIBDIR}/python3.12/site-packages/dlr)
+ endif()
+ 
+ if(USE_TENSORFLOW_RT)
+@@ -147,7 +146,7 @@ include_directories(${PROJECT_SOURCE_DIR}
+                     SYSTEM ${TARGET_FS}/usr/local/include
+                     SYSTEM ${TARGET_FS}/usr/include/gstreamer-1.0/
+                     SYSTEM ${TARGET_FS}/usr/include/glib-2.0/
+-                    SYSTEM ${TARGET_FS}/usr/lib/aarch64-linux-gnu/glib-2.0/include
++                    SYSTEM ${TARGET_FS}/usr/${CMAKE_INSTALL_LIBDIR}/aarch64-linux-gnu/glib-2.0/include
+                     SYSTEM ${TARGET_FS}/usr/include/opencv4/
+                     SYSTEM ${TARGET_FS}/usr/include/processor_sdk/vision_apps/
+                     SYSTEM ${TARGET_FS}/usr/include/edgeai-apps-utils/
+@@ -155,7 +154,7 @@ include_directories(${PROJECT_SOURCE_DIR}
+ 
+ if(USE_DLR_RT)
+ include_directories(${TARGET_FS}/usr/include/neo-ai-dlr/include)
+-include_directories(${TARGET_FS}/usr/lib/python3.12/site-packages/dlr/include/)
++include_directories(${TARGET_FS}/usr/${CMAKE_INSTALL_LIBDIR}/python3.12/site-packages/dlr/include/)
+ endif()
+ 
+ if(USE_TENSORFLOW_RT)
+-- 
+2.44.1
+

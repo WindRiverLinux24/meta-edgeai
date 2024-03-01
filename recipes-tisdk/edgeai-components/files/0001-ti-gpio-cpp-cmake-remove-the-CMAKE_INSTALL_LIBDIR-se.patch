@@ -1,0 +1,31 @@
+From 043f5f8a62276c531028e0ff23e1f431922148bc Mon Sep 17 00:00:00 2001
+From: Xulin Sun <xulin.sun@windriver.com>
+Date: Wed, 28 Feb 2024 08:50:10 +0000
+Subject: [PATCH] ti-gpio-cpp: cmake: remove the CMAKE_INSTALL_LIBDIR setting
+
+Remove the CMAKE_INSTALL_LIBDIR setting, and depend on the system's
+CMAKE_INSTALL_LIBDIR value, since the default CMAKE_INSTALL_LIBDIR
+for WRLinux is 'lib64', and when multilib is disabled, it is 'lib'.
+
+(LOCAL REV: NOT UPSTREAM) - Wrlinux specific
+
+Signed-off-by: Xulin Sun <xulin.sun@windriver.com>
+---
+ cmake/common.cmake | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/cmake/common.cmake b/cmake/common.cmake
+index 549babe..68ced7a 100644
+--- a/cmake/common.cmake
++++ b/cmake/common.cmake
+@@ -44,7 +44,6 @@ SET(CMAKE_FIND_LIBRARY_SUFFIXES ".a" ".lib" ".so")
+ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib/${CMAKE_BUILD_TYPE})
+ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib/${CMAKE_BUILD_TYPE})
+ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin/${CMAKE_BUILD_TYPE})
+-set(CMAKE_INSTALL_LIBDIR lib)
+ 
+ if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+     set(CMAKE_INSTALL_PREFIX /usr CACHE PATH "Installation Prefix" FORCE)
+-- 
+2.35.5
+

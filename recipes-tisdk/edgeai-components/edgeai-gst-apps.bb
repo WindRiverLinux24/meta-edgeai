@@ -7,7 +7,9 @@ LIC_FILES_CHKSUM = "file://${WORKDIR}/git/LICENSE;md5=dc68ab0305d85e56491b9a9aed
 
 PV = "1.0.0"
 BRANCH = "main"
-SRC_URI = "git://github.com/TexasInstruments/edgeai-gst-apps.git;branch=${BRANCH};protocol=https"
+SRC_URI = "git://github.com/TexasInstruments/edgeai-gst-apps.git;branch=${BRANCH};protocol=https \
+file://0001-apps_cpp-edgeai_utils-Fix-Werror-format-security-err.patch \
+file://0001-edgeai-gst-apps-cmake-remove-the-hardcode-lib-settin.patch;patchdir=.."
 SRCREV = "05e99b3f51a499c0a087d0154f1afeab94c28e8e"
 
 PLAT_SOC = ""

@@ -1,0 +1,57 @@
+From 990a114c97b226d46b10f8e097e819c590b97179 Mon Sep 17 00:00:00 2001
+From: Xulin Sun <xulin.sun@windriver.com>
+Date: Sat, 31 Aug 2024 13:25:36 +0000
+Subject: [PATCH] edgeai-tiovx-apps: cmake: remove the CMAKE_INSTALL_LIBDIR
+ setting
+
+Remove the CMAKE_INSTALL_LIBDIR setting, and depend on the system's
+CMAKE_INSTALL_LIBDIR value, since the default CMAKE_INSTALL_LIBDIR
+for WRLinux is 'lib64', and when multilib is disabled, it is 'lib'.
+
+And disable Werror warning flag for c & c++ building.
+
+(LOCAL REV: NOT UPSTREAM) - Wrlinux specific
+
+Signed-off-by: Xulin Sun <xulin.sun@windriver.com>
+---
+ cmake/common.cmake | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/cmake/common.cmake b/cmake/common.cmake
+index a106027..ff6538e 100644
+--- a/cmake/common.cmake
++++ b/cmake/common.cmake
+@@ -1,7 +1,8 @@
+ include(GNUInstallDirs)
+ 
+ add_compile_options(-Wall)
+-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
++set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17 -Wno-error=format-security")
++set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-error=format-security")
+ 
+ # Specific compile optios across all targets
+ #add_compile_definitions(MINIMAL_LOGGING)
+@@ -21,7 +22,6 @@ endif()
+ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_OUTPUT_DIR}/lib/${CMAKE_BUILD_TYPE})
+ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_OUTPUT_DIR}/lib/${CMAKE_BUILD_TYPE})
+ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_OUTPUT_DIR}/bin/${CMAKE_BUILD_TYPE})
+-set(CMAKE_INSTALL_LIBDIR           lib)
+ 
+ if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+     set(CMAKE_INSTALL_PREFIX /usr CACHE PATH "Installation Prefix" FORCE)
+@@ -78,9 +78,9 @@ add_definitions(
+ 
+ set(VISION_APPS_LIBS_PATH $ENV{VISION_APPS_LIBS_PATH})
+ set(EDGEAI_LIBS_PATH $ENV{EDGEAI_LIBS_PATH})
+-link_directories(${TARGET_FS}/usr/lib/aarch64-linux
+-                 ${TARGET_FS}/usr/lib
+-                 ${CMAKE_LIBRARY_PATH}/usr/lib
++link_directories(${TARGET_FS}/usr/${CMAKE_INSTALL_LIBDIR}/aarch64-linux
++                 ${TARGET_FS}/usr/${CMAKE_INSTALL_LIBDIR}
++                 ${CMAKE_LIBRARY_PATH}/usr/${CMAKE_INSTALL_LIBDIR}
+                  ${CMAKE_LIBRARY_PATH}/lib
+                  ${VISION_APPS_LIBS_PATH}
+                  ${EDGEAI_LIBS_PATH}
+-- 
+2.44.1
+

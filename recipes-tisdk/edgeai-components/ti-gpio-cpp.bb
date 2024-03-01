@@ -5,7 +5,8 @@ HOMEPAGE = "https://github.com/TexasInstruments/ti-gpio-cpp"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${S}/LICENSE.txt;md5=4a6102d7daa29b70c1abe088c13a0cde"
 
-SRC_URI = "git://github.com/TexasInstruments/ti-gpio-cpp.git;protocol=https;branch=master"
+SRC_URI = "git://github.com/TexasInstruments/ti-gpio-cpp.git;protocol=https;branch=master \
+file://0001-ti-gpio-cpp-cmake-remove-the-CMAKE_INSTALL_LIBDIR-se.patch"
 SRCREV = "982c761ec428a0d2c81d63d2986323fbc38d88db"
 
 S = "${WORKDIR}/git"
