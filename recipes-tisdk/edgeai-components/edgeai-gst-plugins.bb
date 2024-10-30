@@ -47,16 +47,16 @@ EXTRA_OEMESON:append:adas = " -Ddl-plugins=disabled"
 inherit meson pkgconfig
 
 do_configure:prepend() {
-   sed -i -e "s:/lib:${base_libdir}:g" ${S}/pkgconfig/edgeai_apps_utils.pc
-   sed -i -e "s:/lib:${base_libdir}:g" ${S}/pkgconfig/imaging.pc
-   sed -i -e "s:/lib:${base_libdir}:g" ${S}/pkgconfig/tiovx.pc
-   sed -i -e "s:/lib:${base_libdir}:g" ${S}/pkgconfig/ti_stereo_perception.pc
-   sed -i -e "s:/lib:${base_libdir}:g" ${S}/pkgconfig/ti_vision_apps.pc
+   sed -i -e "s:/lib:/${baselib}:g" ${S}/pkgconfig/edgeai_apps_utils.pc
+   sed -i -e "s:/lib:/${baselib}:g" ${S}/pkgconfig/imaging.pc
+   sed -i -e "s:/lib:/${baselib}:g" ${S}/pkgconfig/tiovx.pc
+   sed -i -e "s:/lib:/${baselib}:g" ${S}/pkgconfig/ti_stereo_perception.pc
+   sed -i -e "s:/lib:/${baselib}:g" ${S}/pkgconfig/ti_vision_apps.pc
    sed -i "3c libdir=${libdir}" ${S}/pkgconfig/edgeai_dl_inferer.pc
-   sed -i -e "s:/lib/:${base_libdir}/:g" -e "s:python3.10:python3.11:g" ${S}/pkgconfig/edgeai_dl_inferer.pc
-   sed -i -e "s:/lib:${base_libdir}:g" ${S}/pkgconfig/edgeai_tiovx_kernels.pc
-   sed -i -e "s:/lib:${base_libdir}:g" ${S}/pkgconfig/edgeai_tiovx_modules.pc
-   sed -i -e "s:/lib:${base_libdir}:g" ${S}/crossbuild/environment
+   sed -i -e "s:/lib/:/${baselib}/:g" ${S}/pkgconfig/edgeai_dl_inferer.pc
+   sed -i -e "s:/lib:/${baselib}:g" ${S}/pkgconfig/edgeai_tiovx_kernels.pc
+   sed -i -e "s:/lib:/${baselib}:g" ${S}/pkgconfig/edgeai_tiovx_modules.pc
+   sed -i -e "s:/lib:/${baselib}:g" ${S}/crossbuild/environment
 }
 
 do_install:append() {
