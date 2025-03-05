@@ -8,12 +8,13 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1f7721ee7d288457c5a70d0c8ff44b87"
 PV = "1.0.0"
 BRANCH = "main"
 SRC_URI = "git://github.com/TexasInstruments/edgeai-gst-plugins.git;branch=${BRANCH};protocol=https"
-SRCREV = "2717228b0a409a966b51530abbe7fe4b8d929f9d"
+SRCREV = "02a57b92472fb040918b695de7d9b1923801d84d"
 
 PLAT_SOC = ""
 PLAT_SOC:j721e = "j721e"
 PLAT_SOC:j721s2 = "j721s2"
 PLAT_SOC:j784s4 = "j784s4"
+PLAT_SOC:j742s2 = "j742s2"
 PLAT_SOC:j722s = "j722s"
 PLAT_SOC:am62axx = "am62a"
 PLAT_SOC:am62xx = "am62x"
@@ -33,7 +34,7 @@ RDEPENDS:${PN}:remove:am62pxx = "edgeai-tiovx-modules"
 RDEPENDS:${PN}-source:remove:am62xx = "edgeai-tiovx-modules-dev"
 RDEPENDS:${PN}-source:remove:am62pxx = "edgeai-tiovx-modules-dev"
 
-COMPATIBLE_MACHINE = "j721e|j721s2|j784s4|j722s|am62axx|am62xx|am62pxx"
+COMPATIBLE_MACHINE = "j721e|j721s2|j784s4|j742s2|j722s|am62axx|am62xx|am62pxx"
 
 export SOC = "${PLAT_SOC}"
 

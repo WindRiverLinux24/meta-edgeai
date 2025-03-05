@@ -10,21 +10,22 @@ BRANCH = "main"
 SRC_URI = "git://github.com/TexasInstruments/edgeai-tiovx-apps.git;branch=${BRANCH};protocol=https \
 file://0001-edgeai-tiovx-apps-cmake-remove-the-CMAKE_INSTALL_LIB.patch"
 
-SRCREV = "a13db9fd967ea41e17d49a2ad270f669bda17d4f"
+SRCREV = "b340a8bbfbfacf5c8284d0ad05c0cc9e63a162d5"
 
 PLAT_SOC = ""
 PLAT_SOC:j721e = "j721e"
 PLAT_SOC:j721s2 = "j721s2"
 PLAT_SOC:j784s4 = "j784s4"
 PLAT_SOC:j722s = "j722s"
+PLAT_SOC:j742s2 = "j742s2"
 PLAT_SOC:am62axx = "am62a"
 
 S = "${WORKDIR}/git"
 
-DEPENDS = "edgeai-tiovx-modules yaml-cpp glib-2.0 ffmpeg libdrm"
+DEPENDS = "edgeai-tiovx-kernels yaml-cpp glib-2.0 ffmpeg libdrm"
 RDEPENDS:${PN}-source = "cmake bash python3-core"
 
-COMPATIBLE_MACHINE = "j721e|j721s2|j784s4|j722s|am62axx"
+COMPATIBLE_MACHINE = "j721e|j721s2|j784s4|j722s|j742s2|am62axx"
 
 export SOC = "${PLAT_SOC}"
 

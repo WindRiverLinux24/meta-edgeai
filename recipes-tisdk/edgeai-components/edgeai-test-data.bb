@@ -7,18 +7,19 @@ export https_proxy
 export no_proxy
 
 BRANCH = "main"
-SRCREV = "1434cfa9721d1c28658ad2a5b50e9c196187f61d"
+SRCREV = "87e8cc685d4d39f5afa9fc6f74f7616620c49c3a"
 
 SOC = ""
 SOC:j721e = "j721e"
 SOC:j721s2 = "j721s2"
 SOC:j784s4 = "j784s4"
 SOC:j722s = "j722s"
+SOC:j742s2 = "j784s4"
 SOC:am62axx = "am62a"
 SOC:am62xx = "am62x"
 SOC:am62pxx = "am62p"
 
-COMPATIBLE_MACHINE = "j721e|j721s2|j784s4|j722s|am62axx|am62xx|am62pxx"
+COMPATIBLE_MACHINE = "j721e|j721s2|j784s4|j722s|j742s2|am62axx|am62xx|am62pxx"
 
 do_fetch() {
     mkdir -p ${WORKDIR}/script
@@ -32,7 +33,7 @@ do_fetch() {
     export SOC="${SOC}"
     export EDGEAI_DATA_PATH=${WORKDIR}/edgeai-test-data
     export OOB_DEMO_ASSETS_PATH=${WORKDIR}/oob-demo-assets
-    export EDGEAI_SDK_VERSION=10_00_00
+    export EDGEAI_SDK_VERSION=10_01_00
 
     ./download_test_data.sh
 

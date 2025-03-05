@@ -4,16 +4,14 @@ require recipes-core/images/tisdk-default-image.bb
 
 PN:adas = "tisdk-adas-image"
 
-COMPATIBLE_MACHINE = "j721e|j721s2|j784s4|j722s|am62axx"
+COMPATIBLE_MACHINE = "j721e|j721s2|j784s4|j722s|j742s2|am62axx"
 
 EDGEAI_STACK = " \
         ti-vision-apps-dev \
         ti-edgeai-firmware \
         ti-tidl-dev \
         edgeai-tiovx-kernels-dev \
-        edgeai-tiovx-modules-dev \
         edgeai-tiovx-kernels-source \
-        edgeai-tiovx-modules-source \
         edgeai-apps-utils-source \
         edgeai-test-data \
         edgeai-tidl-models \
@@ -25,7 +23,8 @@ EDGEAI_STACK:append:edgeai = " \
         ti-tidl-osrt-dev \
         ti-tidl-osrt-staticdev \
         edgeai-init \
-        edgeai-gui-app \
+        edgeai-tiovx-modules-dev \
+        edgeai-tiovx-modules-source \
         edgeai-gst-plugins-dev \
         edgeai-dl-inferer-staticdev \
         edgeai-gst-apps-source \
@@ -58,8 +57,6 @@ IMAGE_INSTALL:remove = "\
 IMAGE_INSTALL:append = " \
     resize-rootfs \
 "
-
-IMAGE_INSTALL:append:j721e = " pmic-fix"
 
 WKS_FILE = "tisdk-edgeai-sdimage.wks"
 WIC_CREATE_EXTRA_ARGS += " --no-fstab-update"

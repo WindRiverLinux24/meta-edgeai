@@ -11,22 +11,22 @@ LICENSE = "MIT"
 PV="1.0.0"
 
 SRCREV_FORMAT="default"
-SRCREV_arm-tidl="d71785f6619bcc07f2fc6ed59cefe1de8fb18288"
-SRCREV_concerto="38b9190a5d335e58d81d21e3e058b11e5c47c605"
-SRCREV_onnxruntime="b07b733888500a37064f560f3d61d5c8ab1201c7"
+SRCREV_arm-tidl="38a2f55ed3b8b11e1e25359f724b75320f26f003"
+SRCREV_concerto="707b11afdbe5d0abb109a42b06828ba70f555bff"
+SRCREV_onnxruntime="f145bec7bee26b9dfa43b3e07645ee1a5f8b8140"
 SRCREV_tensorflow="422156a973b23bab6b86176a245a66193dccb995"
 
 SRC_URI = " \
     git://git.ti.com/git/processor-sdk-vision/arm-tidl.git;branch=master;protocol=https;name=arm-tidl;destsuffix=git/arm-tidl \
     git://git.ti.com/git/processor-sdk/concerto.git;branch=main;protocol=https;name=concerto;destsuffix=git/concerto \
-    git://github.com/TexasInstruments/onnxruntime;branch=tidl-1.14;protocol=https;name=onnxruntime;destsuffix=git/onnxruntime  \
+    git://github.com/TexasInstruments/onnxruntime;branch=tidl-1.15;protocol=https;name=onnxruntime;destsuffix=git/onnxruntime  \
     git://github.com/TexasInstruments/tensorflow;branch=tidl-j7-2.12;protocol=https;name=tensorflow;destsuffix=git/tensorflow  \
-    https://github.com/protocolbuffers/protobuf/releases/download/v3.20.2/protobuf-cpp-3.20.2.tar.gz;name=protobuf;subdir=git/protobuf-3.20.2 \
+    https://github.com/protocolbuffers/protobuf/archive/refs/tags/v3.21.12.tar.gz;name=protobuf;subdir=git/protobuf-3.21.12 \
 "
-SRC_URI[protobuf.sha256sum] = "a0167e2ba24bba0a180fbc9392f3a43e749d7a26e630fe9c1a1ba32a53675ac3"
+SRC_URI[protobuf.sha256sum] = "930c2c3b5ecc6c9c12615cf5ad93f1cd6e12d0aba862b572e076259970ac3a53"
 
 do_cp_downloaded_build_deps() {
-    mv ${S}/protobuf-3.20.2/*/* ${S}/protobuf-3.20.2
+    mv ${S}/protobuf-3.21.12/*/* ${S}/protobuf-3.21.12
 }
 addtask cp_downloaded_build_deps after do_unpack before do_patch
 
@@ -35,6 +35,7 @@ PLAT_SOC:j721e = "j721e"
 PLAT_SOC:j721s2 = "j721s2"
 PLAT_SOC:j784s4 = "j784s4"
 PLAT_SOC:j722s = "j722s"
+PLAT_SOC:j742s2 = "j742s2"
 PLAT_SOC:am62axx = "am62a"
 
 CPU = "A72"
@@ -43,7 +44,7 @@ CPU:j722s = "A53"
 
 DEPENDS += "ti-vision-apps"
 
-COMPATIBLE_MACHINE = "j721e|j721s2|j784s4|j722s|am62axx"
+COMPATIBLE_MACHINE = "j721e|j721s2|j784s4|j722s|j742s2|am62axx"
 
 export TARGET_FS = "${WORKDIR}/recipe-sysroot"
 
@@ -65,7 +66,7 @@ do_compile() {
     CONCERTO_ROOT=${S}/concerto \
     TF_REPO_PATH=${S}/tensorflow \
     ONNX_REPO_PATH=${S}/onnxruntime \
-    TIDL_PROTOBUF_PATH=${S}/protobuf-3.20.2 \
+    TIDL_PROTOBUF_PATH=${S}/protobuf-3.21.12 \
     GCC_LINUX_ARM_ROOT= \
     TARGET_SOC=${PLAT_SOC} \
     CROSS_COMPILE_LINARO=aarch64-wrs-linux- \
@@ -83,6 +84,7 @@ TIDL_SOC_NAME:j721e = "J721E"
 TIDL_SOC_NAME:j721s2 = "J721S2"
 TIDL_SOC_NAME:j784s4 = "J784S4"
 TIDL_SOC_NAME:j722s = "J722S"
+TIDL_SOC_NAME:j742s2 = "J742S2"
 TIDL_SOC_NAME:am62axx = "AM62A"
 
 do_install() {

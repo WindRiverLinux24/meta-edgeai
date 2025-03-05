@@ -9,7 +9,7 @@ PV = "1.0.0"
 BRANCH = "main"
 SRC_URI = "git://git.ti.com/git/edgeai/edgeai-dl-inferer.git;protocol=https;branch=${BRANCH} \
 file://0001-edgeai-dl-inferer-cmake-remove-the-hardcode-lib-sett.patch"
-SRCREV = "3e102e55b53c99749ff36f6a52f87d75f6df6305"
+SRCREV = "f1592e41f8f859fc345865fa4e15efb85d06d3ec"
 
 PLAT_SOC = ""
 PLAT_SOC:j721e = "j721e"

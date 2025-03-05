@@ -9,13 +9,14 @@ PV = "1.0.0"
 BRANCH = "main"
 SRC_URI = "git://git.ti.com/git/edgeai/edgeai-tiovx-kernels.git;branch=${BRANCH};protocol=https \
 file://0001-edgeai-tiovx-kernels-cmake-remove-the-CMAKE_INSTALL_.patch"
-SRCREV = "81daae1e361e6eb43621601a54e63e7071b32922"
+SRCREV = "2c8cac074de9da34ad053cc8fbb0b9a2bec98782"
 
 PLAT_SOC = ""
 PLAT_SOC:j721e = "j721e"
 PLAT_SOC:j721s2 = "j721s2"
 PLAT_SOC:j784s4 = "j784s4"
 PLAT_SOC:j722s = "j722s"
+PLAT_SOC:j742s2 = "j742s2"
 PLAT_SOC:am62axx = "am62a"
 
 S = "${WORKDIR}/git"
@@ -23,7 +24,7 @@ S = "${WORKDIR}/git"
 DEPENDS = "ti-vision-apps edgeai-apps-utils"
 RDEPENDS:${PN}-source = "cmake"
 
-COMPATIBLE_MACHINE = "j721e|j721s2|j784s4|j722s|am62axx"
+COMPATIBLE_MACHINE = "j721e|j721s2|j784s4|j722s|j742s2|am62axx"
 
 export SOC = "${PLAT_SOC}"
 

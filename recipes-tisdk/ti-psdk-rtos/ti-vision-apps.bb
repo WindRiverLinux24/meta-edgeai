@@ -1,9 +1,9 @@
 SUMMARY = "OpenVX Middleware library"
 DESCRIPTION = "Builds tivision_apps user space library"
 
-PR:append = "_edgeai_7"
+PR:append = "_edgeai_10"
 
-PV = "10.0.0"
+PV = "10.1.0"
 
 LICENSE = "TI-TFL & BSD-2-Clause & BSD-3-Clause & BSD-4-Clause & MIT & Apache-2.0 & Apache-2.0-with-LLVM-exception & \
            Khronos & Hewlett-Packard & Patrick-Powell & FTL & Zlib & CC0-1.0 & OpenSSL"
@@ -25,16 +25,16 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/../meta-ti/meta-ti-bsp/licenses/TI-TFL;md
                     "
 
 SRCREV_FORMAT="default"
-SRCREV_sdk_builder = "7e104e54870c8bc751ed74873ada8519f4fba73f"
-SRCREV_app_utils = "07816742bf0c4cd372c19eeebde64ed9499ac826"
-SRCREV_vision_apps = "8b1b730370f5ca028f31d2521408920f5536b57b"
-SRCREV_tiovx = "370e9661a318c5fdce8e05835252433ca3daf17a"
-SRCREV_imaging = "0f199b4d6d6cf0212fae88f24e764ebb6df73fca"
-SRCREV_video_io = "108ae96788c3f97768c434d011269518532d2b3b"
-SRCREV_ti-perception-toolkit = "8d090941dd671a5e670aa8f777986be73763ab41"
+SRCREV_sdk_builder = "e21501bb0b9ff0922cb64b6e5a303a82266d28f7"
+SRCREV_app_utils = "04355e7112f66093a56cacdb109faa317b148c02"
+SRCREV_vision_apps = "c500b3ee4db9a040aae99ddc8d8c709a1275cbe5"
+SRCREV_tiovx = "cbcf513ac89fa53700a9055c1296b844d9ee3bd4"
+SRCREV_imaging = "d2a3565032e362df67a82f692a6d72d5b9b4638b"
+SRCREV_video_io = "c75d8585e6a184131cdf6c927c8f0bacb517885a"
+SRCREV_ti-perception-toolkit = "7074d1c78e28082c657b77bf2ed5dc40525146c0"
 SRCREV_psdk_include = "2dde83677ad4daf0d3e53bcd6d2a032a9bac53aa"
-SRCREV_arm-tidl = "d71785f6619bcc07f2fc6ed59cefe1de8fb18288"
-SRCREV_concerto = "38b9190a5d335e58d81d21e3e058b11e5c47c605"
+SRCREV_arm-tidl = "38a2f55ed3b8b11e1e25359f724b75320f26f003"
+SRCREV_concerto = "707b11afdbe5d0abb109a42b06828ba70f555bff"
 TI_BRANCH = "main"
 FILES:${PN} += "/opt/* \
                 /usr/lib64/* \
@@ -65,13 +65,14 @@ file://0001-makefile_linux_arm-replace-usr-lib-with-variable-lib.patch;patchdir=
 DEPENDS = "glm devil freetype ti-rpmsg-char repo-native mesa-pvr libpam"
 DEPENDS:remove:am62axx = " mesa-pvr"
 
-COMPATIBLE_MACHINE = "j721e|j721s2|j784s4|j722s|am62axx"
+COMPATIBLE_MACHINE = "j721e|j721s2|j784s4|j722s|j742s2|am62axx"
 
 PLAT_SOC = ""
 PLAT_SOC:j721e = "j721e"
 PLAT_SOC:j721s2 = "j721s2"
 PLAT_SOC:j784s4 = "j784s4"
 PLAT_SOC:j722s = "j722s"
+PLAT_SOC:j742s2 = "j742s2"
 PLAT_SOC:am62axx = "am62a"
 
 S = "${WORKDIR}"
