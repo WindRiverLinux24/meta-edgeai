@@ -9,7 +9,7 @@ PV = "1.0.0"
 BRANCH = "main"
 SRC_URI = "git://git.ti.com/git/edgeai/edgeai-tiovx-modules.git;branch=${BRANCH};protocol=https \
 file://0001-edgeai-tiovx-modules-cmake-remove-the-CMAKE_INSTALL_.patch"
-SRCREV = "39eefc707ed3ed1c62a3b0bf99c42a61bd798125"
+SRCREV = "41bcecc816cda81ef84761596298b1e767253c97"
 
 PLAT_SOC = ""
 PLAT_SOC:j721e = "j721e"

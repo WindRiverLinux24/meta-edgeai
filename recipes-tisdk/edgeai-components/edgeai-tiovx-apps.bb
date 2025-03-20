@@ -10,7 +10,7 @@ BRANCH = "main"
 SRC_URI = "git://github.com/TexasInstruments/edgeai-tiovx-apps.git;branch=${BRANCH};protocol=https \
 file://0001-edgeai-tiovx-apps-cmake-remove-the-CMAKE_INSTALL_LIB.patch"
 
-SRCREV = "b340a8bbfbfacf5c8284d0ad05c0cc9e63a162d5"
+SRCREV = "d9958735a492c7281f3dc4508fa21386e611b31d"
 
 PLAT_SOC = ""
 PLAT_SOC:j721e = "j721e"

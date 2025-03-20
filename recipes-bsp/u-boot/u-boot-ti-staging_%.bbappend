@@ -1,9 +1,5 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
-SRC_URI:append = " \
-    file://tiU25.01-TI-HACK-Kconfig-Add-default-bootcmd-for-all-devices-of-ARCH_K3.patch \
-"
-
 SRC_URI:append:j721e = " \
     file://0001-Optimal-QoS-Settings.patch \
     file://0001-arch-arm-dts-k3-j721e-Update-memory-map-for-PSDK-RTO.patch \
@@ -15,12 +11,6 @@ SRC_URI:append:j721s2 = " \
 
 SRC_URI:append:j784s4 = " \
     file://0001-arch-arm-dts-k3-j784s4-k3-am69-Update-memory-map-for.patch \
-    file://0001-HACK-remoteproc-k3-r5-Release-processor-control-for-.patch \
-    file://0002-HACK-arm-mach-k3-j7xx_hardware.h-Expose-MCU-R5-proc-.patch \
-    file://0003-HACK-arch-mach-k3-common-Add-support-to-shutdown-MCU.patch \
-    file://0004-include-environment-ti-Add-firmware-for-MCU-R5-core1.patch \
-    file://0005-arm-dts-k3-j7xx-binman-Enable-split-mode-for-MCU-R5F.patch \
-    file://0006-arm-dts-k3-j7xx-mcu-wakeup-Enable-split-mode-for-MCU.patch \
 "
 
 SRC_URI:append:j742s2 = " \
