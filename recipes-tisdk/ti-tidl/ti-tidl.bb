@@ -57,7 +57,7 @@ EXTRA_OEMAKE += "-C ${S}/arm-tidl"
 do_compile() {
     ln -snf ${TARGET_FS} ${WORKDIR}/targetfs
 
-    PSDK_INSTALL_PATH=${WORKDIR} \
+    export PSDK_INSTALL_PATH=${WORKDIR} \
     IVISION_PATH=${TARGET_FS}${includedir}/processor_sdk/ivision \
     VISION_APPS_PATH=${TARGET_FS}${includedir}/processor_sdk/vision_apps \
     APP_UTILS_PATH=${TARGET_FS}${includedir}/processor_sdk/app_utils \
@@ -71,7 +71,7 @@ do_compile() {
     TARGET_SOC=${PLAT_SOC} \
     CROSS_COMPILE_LINARO=aarch64-wrs-linux- \
     LINUX_SYSROOT_ARM=${STAGING_DIR_TARGET} \
-    TREAT_WARNINGS_AS_ERROR=0 \
+    TREAT_WARNINGS_AS_ERROR=0
     oe_runmake
 }
 
