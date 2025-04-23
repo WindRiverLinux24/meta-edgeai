@@ -20,7 +20,7 @@ PLAT_SFX:j722s = "j722s"
 PLAT_SFX:j742s2 = "j742s2"
 PLAT_SFX:am62axx = "am62a"
 
-SRCREV = "a514fa172b77d21e3f44956bd7e0c79737f86e82"
+SRCREV = "328598874e408e97a830bcd33d0ff6e85828ec87"
 BRANCH = "main"
 
 SRC_URI = " \
@@ -34,10 +34,10 @@ PV = "1.0.0"
 # Secure Build
 inherit ti-secdev
 
-FW_DIR:edgeai = "${PLAT_SFX}/vision_apps_eaik"
+FW_DIR = "${PLAT_SFX}/vision_apps_eaik"
 FW_DIR:adas = "${PLAT_SFX}/vision_apps_evm"
 
-INSTALL_FW_DIR:edgeai = "${nonarch_base_libdir}/firmware/vision_apps_eaik/"
+INSTALL_FW_DIR = "${nonarch_base_libdir}/firmware/vision_apps_eaik/"
 INSTALL_FW_DIR:adas = "${nonarch_base_libdir}/firmware/vision_apps_evm/"
 
 MCU_1_0_FW = "vx_app_rtos_linux_mcu1_0.out"

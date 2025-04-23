@@ -1,7 +1,7 @@
 SUMMARY = "OpenVX Middleware library"
 DESCRIPTION = "Builds tivision_apps user space library"
 
-PR:append = "_edgeai_10"
+PR:append = "_edgeai_12"
 
 PV = "10.1.0"
 

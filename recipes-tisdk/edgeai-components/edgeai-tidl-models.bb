@@ -7,7 +7,7 @@ export https_proxy
 export no_proxy
 
 BRANCH = "main"
-SRCREV = "87e8cc685d4d39f5afa9fc6f74f7616620c49c3a"
+SRCREV = "67fcf45b5299ea425118124784d11f8b2c28f33c"
 
 SOC = ""
 SOC:j721e = "j721e"
@@ -16,10 +16,8 @@ SOC:j784s4 = "j784s4"
 SOC:j722s = "j722s"
 SOC:j742s2 = "j784s4"
 SOC:am62axx = "am62a"
-SOC:am62xx = "am62x"
-SOC:am62pxx = "am62p"
 
-COMPATIBLE_MACHINE = "j721e|j721s2|j784s4|j722s|j742s2|am62axx|am62xx|am62pxx"
+COMPATIBLE_MACHINE = "j721e|j721s2|j784s4|j722s|j742s2|am62axx"
 
 do_fetch() {
     mkdir -p ${WORKDIR}/script
@@ -31,7 +29,7 @@ do_fetch() {
     chmod +x ./download_models.sh
 
     export SOC="${SOC}"
-    export EDGEAI_SDK_VERSION=10_01_00
+    export EDGEAI_SDK_VERSION=11_00_00
     ./download_models.sh --recommended
 }
 

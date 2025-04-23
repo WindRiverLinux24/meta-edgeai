@@ -8,9 +8,9 @@ LIC_FILES_CHKSUM = "file://${WORKDIR}/git/LICENSE;md5=dc68ab0305d85e56491b9a9aed
 PV = "1.0.0"
 BRANCH = "main"
 SRC_URI = "git://github.com/TexasInstruments/edgeai-tiovx-apps.git;branch=${BRANCH};protocol=https \
-file://0001-edgeai-tiovx-apps-cmake-remove-the-CMAKE_INSTALL_LIB.patch"
-
-SRCREV = "d9958735a492c7281f3dc4508fa21386e611b31d"
+           file://0001-edgeai-tiovx-apps-cmake-remove-the-CMAKE_INSTALL_LIB.patch \
+           "
+SRCREV = "a1d7060fe9f913506b62481c2ee3e390d5b4f207"
 
 PLAT_SOC = ""
 PLAT_SOC:j721e = "j721e"
