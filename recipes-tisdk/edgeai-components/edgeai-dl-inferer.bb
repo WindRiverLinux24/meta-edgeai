@@ -30,8 +30,10 @@ export SOC = "${PLAT_SOC}"
 
 EXTRA_OECMAKE = "-DTARGET_FS=${WORKDIR}/recipe-sysroot -DCMAKE_SKIP_RPATH=TRUE -DCMAKE_OUTPUT_DIR=${WORKDIR}/out"
 
-FILES:${PN} += "/usr/lib/python3.12/site-packages/"
-FILES:${PN} += "/usr/lib64/python3.12/site-packages/"
+inherit python3-dir
+
+FILES:${PN} += " ${PYTHON_SITEPACKAGES_DIR}/*"
+
 PACKAGES += "${PN}-source"
 FILES:${PN}-source += "/opt/"
 

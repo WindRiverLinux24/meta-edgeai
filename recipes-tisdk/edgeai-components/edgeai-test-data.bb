@@ -7,7 +7,7 @@ export https_proxy
 export no_proxy
 
 BRANCH = "main"
-SRCREV = "67fcf45b5299ea425118124784d11f8b2c28f33c"
+SRCREV = "cd08868eb31a18d4ee3c533079b64ee167977443"
 
 SOC = ""
 SOC:j721e = "j721e"
@@ -31,7 +31,7 @@ do_fetch() {
     export SOC="${SOC}"
     export EDGEAI_DATA_PATH=${WORKDIR}/edgeai-test-data
     export OOB_DEMO_ASSETS_PATH=${WORKDIR}/oob-demo-assets
-    export EDGEAI_SDK_VERSION=10_01_00
+    export EDGEAI_SDK_VERSION=11_00_00
 
     ./download_test_data.sh
 

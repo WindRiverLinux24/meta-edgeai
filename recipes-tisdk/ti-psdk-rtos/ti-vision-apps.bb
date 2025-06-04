@@ -1,9 +1,9 @@
 SUMMARY = "OpenVX Middleware library"
 DESCRIPTION = "Builds tivision_apps user space library"
 
-PR:append = "_edgeai_12"
+PR:append = "_edgeai_13"
 
-PV = "10.1.0"
+PV = "11.00.00"
 
 LICENSE = "TI-TFL & BSD-2-Clause & BSD-3-Clause & BSD-4-Clause & MIT & Apache-2.0 & Apache-2.0-with-LLVM-exception & \
            Khronos & Hewlett-Packard & Patrick-Powell & FTL & Zlib & CC0-1.0 & OpenSSL"
@@ -15,7 +15,7 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/../meta-ti/meta-ti-bsp/licenses/TI-TFL;md
                     file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302 \
                     file://${COMMON_LICENSE_DIR}/Apache-2.0;md5=89aea4e17d99a7cacdbeed46a0096b10 \
                     file://${COMMON_LICENSE_DIR}/Apache-2.0-with-LLVM-exception;md5=0bcd48c3bdfef0c9d9fd17726e4b7dab \
-                    file://repo/tiovx/include/VX/vx.h;beginline=1;endline=15;md5=37315206223081f32a5b9aaaf912f637 \
+                    file://${WORKDIR}/repo/tiovx/include/VX/vx.h;beginline=1;endline=15;md5=37315206223081f32a5b9aaaf912f637 \
                     file://${COREBASE}/../meta-ti/meta-ti-extras/licenses/Hewlett-Packard;md5=a07676ee09f5bfec457eb5ea75921d01 \
                     file://${COREBASE}/../meta-ti/meta-ti-extras/licenses/Patrick-Powell;md5=7e10716f13cff502f3cf6ebf8fe29c1e \
                     file://${COMMON_LICENSE_DIR}/FTL;md5=f0bf6b09ee8b02121ed10709d9e49d8b \
@@ -62,8 +62,7 @@ file://0001-makefile_linux_arm-replace-usr-lib-with-variable-lib.patch;patchdir=
 # ti_rpmsg_char.h
 # dlr.h
 
-DEPENDS = "glm devil freetype ti-rpmsg-char repo-native mesa-pvr libpam"
-DEPENDS:remove:am62axx = " mesa-pvr"
+DEPENDS = "glm freetype ti-rpmsg-char repo-native virtual/egl libpam"
 
 COMPATIBLE_MACHINE = "j721e|j721s2|j784s4|j722s|j742s2|am62axx"
 
@@ -75,11 +74,11 @@ PLAT_SOC:j722s = "j722s"
 PLAT_SOC:j742s2 = "j742s2"
 PLAT_SOC:am62axx = "am62a"
 
-S = "${WORKDIR}"
-
-EXTRA_OEMAKE += "-C ${S}/repo/sdk_builder"
+S = "${WORKDIR}/repo/sdk_builder"
 
 do_fetch[depends] += "repo-native:do_populate_sysroot"
+
+CLEANBROKEN = "1"
 
 do_compile() {
     export CROSS_COMPILE_LINARO=aarch64-wrs-linux- \
@@ -97,4 +96,4 @@ do_install() {
     oe_runmake yocto_install
 }
 
-INSANE_SKIP:${PN} += "ldflags"
+INSANE_SKIP:${PN} += "ldflags buildpaths"

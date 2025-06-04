@@ -17,8 +17,6 @@ DEPENDS = "\
 "
 
 RDEPENDS:${PN} = "\
-    qtbase \
-    cmake \
     qtquick3d \
     qtmultimedia \
     qt5compat \
@@ -27,10 +25,11 @@ RDEPENDS:${PN} = "\
     qtdeclarative-tools \
     gstreamer1.0-plugins-good \
     gstreamer1.0-plugins-good-qml6 \
+    edgeai-gst-plugins \
 "
 
 BRANCH = "master"
-SRCREV = "12cf3c4a9ae37313ab9062aefecfb2e72e92a60d"
+SRCREV = "d76e1f6aeb2e0523176c2534595728224c578149"
 
 PV = "1.0.0"
 SRC_URI = "git://git.ti.com/git/apps/edgeai-gui-app.git;protocol=https;branch=${BRANCH}"
