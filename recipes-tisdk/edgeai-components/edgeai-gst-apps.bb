@@ -11,7 +11,7 @@ SRC_URI = "git://github.com/TexasInstruments/edgeai-gst-apps.git;branch=${BRANCH
            file://0001-apps_cpp-edgeai_utils-Fix-Werror-format-security-err.patch \
            file://0001-edgeai-gst-apps-cmake-remove-the-hardcode-lib-settin.patch;patchdir=.. \
            "
-SRCREV = "cd08868eb31a18d4ee3c533079b64ee167977443"
+SRCREV = "799dcbda54f829eb7b234bf93a5669addcc1b919"
 
 PLAT_SOC = ""
 PLAT_SOC:j721e = "j721e"
